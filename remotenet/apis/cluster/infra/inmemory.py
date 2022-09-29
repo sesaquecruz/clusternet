@@ -88,8 +88,8 @@ class InMemoryRepository(Repository):
                     item.update(**model.to_dict())
 
 
-    def get_worker_by_url(self, url: str) -> 'WorkerModel | None':
-        return self._get_worker_by(url=url)
+    def get_worker_by_ip(self, ip: str) -> 'WorkerModel | None':
+        return self._get_worker_by(ip=ip)
     
     
     def get_worker_by_id(self, id: int) -> 'WorkerModel | None':

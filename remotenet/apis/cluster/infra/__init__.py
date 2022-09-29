@@ -61,7 +61,7 @@ class Repository(ABC):
         pass
 
     @abstractmethod
-    def get_worker_by_url(self, url: str) -> 'WorkerModel | None':
+    def get_worker_by_ip(self, ip: str) -> 'WorkerModel | None':
         pass
 
     @abstractmethod

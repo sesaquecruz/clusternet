@@ -15,29 +15,30 @@ class CreateWorkerController(Controller):
         return created({'content': f'Worker {model.name} created'})
 
     
-    def verify_if_worker_exists(self, name: str, url: str):
+    def verify_if_worker_exists(self, name: str, ip: str):
         worker = self.repository.get_worker_by_name(name)
         if(worker is not None):
             raise Exception(f'Worker {name} already exists')
 
-        worker = self.repository.get_worker_by_url(url)
+        worker = self.repository.get_worker_by_ip(ip)
         if(worker is not None):
-            raise Exception('Worker url already exists')
+            raise Exception(f'Worker ip {ip} already exists')
 
 
     def handle(self, request: HttpRequest) -> HttpResponse:
-        required_params = ['name', 'url', 'controller_ip', 'controller_port']
+        required_params = ['name', 'ip', 'controller_ip', 'controller_port']
 
         try:
             validate_required_params(request, required_params)
-            name, url = request.body['name'], request.body['url']
-            self.verify_if_worker_exists(name, url)
+            name, ip = request.body['name'], request.body['ip']
+            self.verify_if_worker_exists(name, ip)
 
             model = AddWorkerModel.from_dict({
                 'name': request.get('name'),
+                'ip': request.get('ip'),
                 'controller_ip': request.get('controller_ip'),
                 'controller_port': int(request.body['controller_port']),
-                'url': request.get('url')})
+            })
             return self.create_worker(model)
 
         except BadRequest as ex:
