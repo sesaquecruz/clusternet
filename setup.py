@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="remotenet",
-    version="1.0.0",
+    name='remotenet',
+    version='1.0.0',
     description='Distributed Software Defined Network Emulation',
     long_description='Distributed Software Defined Network Emulation',
     keywords=['networking', 'emulator', 'containernet', 'mininet', 'OpenFlow', 'SDN', 'fog'],
@@ -16,6 +16,11 @@ setup(
         'Operating System :: Ubunbu OS'
     ],
     packages=find_packages(),
+    install_requires = [
+        'Flask',
+        'Flask-Cors',
+        'httpx'
+    ],
     entry_points={
         'console_scripts': [
             'RunCluster = remotenet.server.cluster_app:main',
