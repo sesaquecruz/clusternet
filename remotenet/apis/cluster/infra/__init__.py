@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import List
 
-from apis.models import (
+from remotenet.apis.models import (
     AddContainerModel, AddTunnelModel, AddWorkerModel, 
     ContainerModel, TunnelModel, WorkerModel
 )

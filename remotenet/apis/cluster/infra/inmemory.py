@@ -1,8 +1,8 @@
 from threading import Lock
 from typing import Any, Dict, List
 
-from apis.cluster.infra import Repository
-from apis.models import (
+from remotenet.apis.cluster.infra import Repository
+from remotenet.apis.models import (
     AddContainerModel, AddTunnelModel, AddWorkerModel, 
     ContainerModel, WorkerModel, TunnelModel)
 

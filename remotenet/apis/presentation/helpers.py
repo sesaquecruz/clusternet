@@ -1,8 +1,8 @@
 from flask.wrappers import Request
 
 from typing import Any, Dict, List
-from apis.presentation.exceptions import BadRequest
 
+from remotenet.apis.presentation.exceptions import BadRequest
 from remotenet.apis.presentation.protocols import HttpRequest, HttpResponse
 
 

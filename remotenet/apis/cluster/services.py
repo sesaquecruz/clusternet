@@ -1,10 +1,10 @@
 import httpx
 
-from apis.cluster.infra import Repository
-from apis.models import WorkerModel
-from apis.models.container import ContainerModel
-from apis.presentation.exceptions import NotFound
-from apis.presentation.protocols import HttpResponse
+from remotenet.apis.cluster.infra import Repository
+from remotenet.apis.models import WorkerModel
+from remotenet.apis.models.container import ContainerModel
+from remotenet.apis.presentation.exceptions import NotFound
+from remotenet.apis.presentation.protocols import HttpResponse
 
 
 def get_container_by_name(name: str, repository: Repository) -> ContainerModel:
