@@ -58,7 +58,7 @@ class InMemoryRepository(Repository):
         ]
     
     def _remove_collection_by_worker(self, worker_id: int, collection: str):
-        for item in self.tables[collection]:
+        for item in self.tables[collection].copy():
             if(item['worker_id'] == worker_id):
                 self.tables[collection].remove(item)
 
@@ -74,7 +74,7 @@ class InMemoryRepository(Repository):
 
     def remove_worker(self, id: int):
         with self.lock:
-            for item in self.tables['workers']:
+            for item in self.tables['workers'].copy():
                 if(item['id'] == id):
                     self._remove_collection_by_worker(id, 'containers')
                     self._remove_collection_by_worker(id, 'tunnels')
@@ -122,7 +122,7 @@ class InMemoryRepository(Repository):
 
     def remove_container(self, id: int):
         with self.lock:
-            for item in self.tables['containers']:
+            for item in self.tables['containers'].copy():
                 if(item['id'] == id):
                    self.tables['containers'].remove(item)
     
@@ -152,7 +152,7 @@ class InMemoryRepository(Repository):
 
     def remove_tunnel_by_id(self, id: int):
         with self.lock:
-            for item in self.tables['tunnels']:
+            for item in self.tables['tunnels'].copy():
                 if(item['id'] == id):
                    self.tables['tunnels'].remove(item)
     
