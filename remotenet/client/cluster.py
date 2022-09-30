@@ -9,8 +9,8 @@ class Cluster:
         self.workers: list[RemoteWorker] = []
         self.containers: dict[str, RemoteContainer] = {}
 
-    def create_worker(self, name: str, url: str, controller: str, port: int):
-        data = {'name': name, 'url': url, 'controller_ip': controller, 'controller_port': port}
+    def create_worker(self, name: str, ip: str, controller: str, port: int):
+        data = {'name': name, 'ip': ip, 'controller_ip': controller, 'controller_port': port}
         response = httpx.post(url=f'{self.cluster_url}/workers', json=data)
         
         if(response.is_error):

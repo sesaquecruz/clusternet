@@ -2,10 +2,10 @@ import httpx
 
 
 class RemoteWorker:
-    def __init__(self, cluster: str, name: str, url: str, controller_ip: str, controller_port: int) -> None:
+    def __init__(self, cluster: str, name: str, ip: str, controller_ip: str, controller_port: int) -> None:
         self.cluster    = cluster
         self.name       = name
-        self.url        = url
+        self.ip         = ip
         self.controller = controller_ip
         self.port       = controller_port
         self.is_running = False
