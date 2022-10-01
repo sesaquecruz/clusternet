@@ -8,10 +8,11 @@ class Cluster:
         self.cluster_url = cluster_url
         self.workers: list[RemoteWorker] = []
         self.containers: dict[str, RemoteContainer] = {}
+        self.client = httpx.Client()
 
     def create_worker(self, name: str, ip: str, controller: str, port: int):
         data = {'name': name, 'ip': ip, 'controller_ip': controller, 'controller_port': port}
-        response = httpx.post(url=f'{self.cluster_url}/workers', json=data)
+        response = self.client.post(url=f'{self.cluster_url}/workers', json=data)
         
         if(response.is_error):
             raise Exception(response.json()['error'])
@@ -22,8 +23,8 @@ class Cluster:
 
     def create_container(self, name: str, worker: str, **params):
         data = {'name': name, 'worker_name': worker, **params}
-        response = httpx.post(url=f'{self.cluster_url}/containers', json=data)
-        
+        response = self.client.post(url=f'{self.cluster_url}/containers', json=data)
+
         if(response.is_error):
             raise Exception(response.json()['error'])
         
@@ -33,7 +34,7 @@ class Cluster:
 
     def create_tunnel(self, worker: str, remote_ip: str):
         data = {'worker_name': worker, 'remote_ip': remote_ip}
-        response = httpx.post(url=f'{self.cluster_url}/tunnels', json=data)
+        response = self.client.post(url=f'{self.cluster_url}/tunnels', json=data)
 
         if(response.is_error):
             raise Exception(response.json()['error'])
@@ -52,3 +53,4 @@ class Cluster:
         for worker in self.workers:
             if(worker.is_running):
                 worker.stop()
+        self.client.close()
