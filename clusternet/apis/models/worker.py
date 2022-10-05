@@ -43,6 +43,8 @@ class WorkerModel:
 
     @staticmethod
     def from_dict(data: Dict[str, Any]):
+        if('switch' in data):
+            data.pop('switch')
         return WorkerModel(**data) 
 
     def to_dict(self) -> Dict[str, Any]:
