@@ -53,9 +53,9 @@ def run_command(name: str):
     return make_response(controller, request)
 
 
-@server.route('/tunnels', methods=['POST'])
-def create_tunnel():
-    controller = CreateTunnelController(repository)
+@server.route('/workers/<string:name>/tunnel', methods=['POST'])
+def create_tunnel(name: str):
+    controller = CreateTunnelController(name, repository)
     return make_response(controller, request) 
 
 
