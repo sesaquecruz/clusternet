@@ -1,6 +1,6 @@
 # Remotenet
 
-This project extends the Containernet emulation environment to span the emulation across several physical machines.
+This project extends the [Containernet](https://github.com/containernet/containernet) emulation environment to span the emulation across several physical machines.
 
 ## Install
 
