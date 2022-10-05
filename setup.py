@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='remotenet',
+    name='clusternet',
     version='1.0.0',
     description='Distributed Software Defined Network Emulation',
     long_description='Distributed Software Defined Network Emulation',
     keywords=['networking', 'emulator', 'containernet', 'mininet', 'OpenFlow', 'SDN', 'fog'],
-    url='https://github.com/EsauM10/remotenet',
+    url='https://github.com/EsauM10/clusternet',
     author='Esaú Mascarenhas',
     author_email='esaumasc@gmail.com',
     classifiers=[
@@ -23,8 +23,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'RunCluster = remotenet.server.cluster_app:main',
-            'RunWorker = remotenet.server.worker_app:main',
+            'RunCluster = clusternet.server.cluster_app:main',
+            'RunWorker = clusternet.server.worker_app:main',
         ]
     },
     zip_safe=False
