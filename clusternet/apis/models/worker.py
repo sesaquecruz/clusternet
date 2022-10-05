@@ -52,6 +52,7 @@ class WorkerModel:
         return {
             'id': self.id,
             'name': self.name,
+            'switch': self.switch,
             'ip': self.ip,
             'controller_ip': self.controller_ip,
             'controller_port': self.controller_port,

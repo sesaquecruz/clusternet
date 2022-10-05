@@ -32,9 +32,6 @@ def create_container_on_remote_worker(worker: WorkerModel, container: ContainerM
 
 def start_remote_worker(worker: WorkerModel) -> HttpResponse:
     body = worker.to_dict()
-    body['switch'] = worker.switch
-    body.pop('is_running')
-    body.pop('tunnels')
     response   = httpx.post(url=f'{worker.url}/start', json=body, timeout=None)
     
     return HttpResponse(
