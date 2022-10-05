@@ -35,6 +35,5 @@ class RemoteWorker:
         if(response.is_error):
             raise Exception(response.json()['error'])
         
-        self.remove()
         self.is_running = False
         print(response.json()['content'])
