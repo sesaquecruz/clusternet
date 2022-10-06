@@ -10,15 +10,17 @@ class Cluster:
         self.containers: dict[str, RemoteContainer] = {}
         self.client = httpx.Client()
 
-    def create_worker(self, name: str, ip: str, controller: str, port: int):
+    def create_worker(self, name: str, ip: str, controller: str, port: int) -> RemoteWorker:
         data = {'name': name, 'ip': ip, 'controller_ip': controller, 'controller_port': port}
         response = self.client.post(url=f'{self.cluster_url}/workers', json=data)
         
         if(response.is_error):
             raise Exception(response.json()['error'])
         
-        self.workers.append(RemoteWorker(cluster=self.cluster_url, **data))
         print(response.json()['content'])
+        worker = RemoteWorker(cluster=self.cluster_url, **data)
+        self.workers.append(worker)
+        return worker
 
 
     def create_container(self, name: str, worker: str, **params):
