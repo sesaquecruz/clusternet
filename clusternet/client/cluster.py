@@ -17,7 +17,7 @@ class Cluster:
         if(response.is_error):
             raise Exception(response.json()['error'])
         
-        print(response.json()['content'])
+        print(f'** {response.json()["content"]}')
         worker = RemoteWorker(cluster=self.cluster_url, **data)
         self.workers.append(worker)
         return worker
@@ -31,7 +31,7 @@ class Cluster:
             raise Exception(response.json()['error'])
         
         self.containers[name] = RemoteContainer(self.cluster_url, name, worker)
-        print(response.json()['content'])
+        print(f'** {response.json()["content"]}')
 
 
     def create_tunnel(self, worker1: RemoteWorker, worker2: RemoteWorker):
@@ -40,7 +40,7 @@ class Cluster:
 
         if(response.is_error):
             raise Exception(response.json()['error'])
-        print(response.json()['content'])
+        print(f'** {response.json()["content"]}')
 
 
     def get_container(self, name: str) -> RemoteContainer:

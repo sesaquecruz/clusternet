@@ -16,7 +16,7 @@ class RemoteWorker:
         
         if(response.is_error):
             raise Exception(response.json()['error'])
-        print(response.json()['content'])
+        print(f'** {response.json()["content"]}')
 
 
     def start(self):
@@ -26,7 +26,7 @@ class RemoteWorker:
             raise Exception(response.json()['error'])
 
         self.is_running = True
-        print(response.json()['content'])
+        print(f'** {response.json()["content"]}')
 
 
     def stop(self):
@@ -36,4 +36,4 @@ class RemoteWorker:
             raise Exception(response.json()['error'])
         
         self.is_running = False
-        print(response.json()['content'])
+        print(f'** {response.json()["content"]}')
