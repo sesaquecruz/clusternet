@@ -1,7 +1,7 @@
 import socket
 from typing import Any, Dict, List
 
-from clusternet.apis.models import ContainerModel
+from clusternet.apis.models import ContainerModel, TunnelModel
 from clusternet.apis.presentation.exceptions import BadRequest, NotFound
 from clusternet.apis.presentation.helpers import bad_request, created, error, internal_server_error, not_found, validate_required_params
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
@@ -22,8 +22,12 @@ class StartWorkerController(Controller):
         return containers
     
 
+    def validate_tunnels(self, data: Dict[str, Any]) -> List[TunnelModel]:
+        return [TunnelModel.from_dict(item) for item in data['tunnels']]
+
+
     def handle(self, request: HttpRequest) -> HttpResponse:   
-        required_params = ['switch', 'controller_ip', 'controller_port', 'containers']
+        required_params = ['switch', 'controller_ip', 'controller_port', 'containers', 'tunnels']
         
         try:
             if(self.net.is_running):
@@ -32,7 +36,8 @@ class StartWorkerController(Controller):
             validate_required_params(request, required_params)
             
             containers = self.validate_containers(request.body)
-            self.net.start(request, containers)
+            tunnels = self.validate_tunnels(request.body)
+            self.net.start(request, containers, tunnels)
 
         except BadRequest as ex:
             return bad_request(error(f'{ex}'))
