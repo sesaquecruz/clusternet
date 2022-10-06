@@ -53,4 +53,6 @@ class Cluster:
         for worker in self.workers:
             if(worker.is_running):
                 worker.stop()
+            worker.remove()
+        
         self.client.close()
