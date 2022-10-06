@@ -32,9 +32,9 @@ class Cluster:
         print(response.json()['content'])
 
 
-    def create_tunnel(self, worker: str, remote_ip: str):
-        data = {'worker_name': worker, 'remote_ip': remote_ip}
-        response = self.client.post(url=f'{self.cluster_url}/tunnels', json=data)
+    def create_tunnel(self, worker1: RemoteWorker, worker2: RemoteWorker):
+        data = {'remote_worker': worker2.name}
+        response = self.client.post(url=f'{self.cluster_url}/workers/{worker1.name}/tunnel', json=data)
 
         if(response.is_error):
             raise Exception(response.json()['error'])
