@@ -11,6 +11,16 @@ class RemoteWorker:
         self.is_running = False
 
 
+    def create_container(self, name: str, **params):
+        data = {'name': name, 'worker_name': self.name, **params}
+        response = httpx.post(url=f'{self.cluster}/containers', json=data)
+
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        
+        print(f'** {response.json()["content"]}')
+
+
     def start(self):
         response = httpx.get(url=f'{self.cluster}/workers/{self.name}/start', timeout=None)
         
