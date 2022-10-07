@@ -1,6 +1,7 @@
 from typing import List
 import httpx
 
+from clusternet.apis.models.container import ContainerModel
 from clusternet.client.container import RemoteContainer
 from clusternet.client.worker import RemoteWorker
 
@@ -38,7 +39,7 @@ class Cluster:
             raise Exception(response.json()['error'])
 
         data = response.json()['content']
-        return RemoteContainer(self.cluster_url, data['name'])
+        return RemoteContainer(self.cluster_url, ContainerModel.from_dict(data))
 
     
     def remove(self, worker: RemoteWorker):
