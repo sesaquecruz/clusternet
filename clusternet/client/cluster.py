@@ -47,6 +47,14 @@ class Cluster:
         return self.containers[name]
 
 
+    def remove(self, worker: RemoteWorker):
+        response = self.client.delete(url=f'{self.cluster_url}/workers/{worker.name}')
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'** {response.json()["content"]}')
+    
+
     def start(self):
         for worker in self.workers:
             worker.start()
@@ -55,6 +63,6 @@ class Cluster:
         for worker in self.workers:
             if(worker.is_running):
                 worker.stop()
-            worker.remove()
+            self.remove(worker)
         
         self.client.close()

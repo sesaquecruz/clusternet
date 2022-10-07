@@ -9,14 +9,6 @@ class RemoteWorker:
         self.controller = controller_ip
         self.port       = controller_port
         self.is_running = False
-    
-
-    def remove(self):
-        response = httpx.delete(url=f'{self.cluster}/workers/{self.name}')
-        
-        if(response.is_error):
-            raise Exception(response.json()['error'])
-        print(f'** {response.json()["content"]}')
 
 
     def start(self):
