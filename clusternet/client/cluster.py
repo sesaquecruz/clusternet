@@ -41,7 +41,19 @@ class Cluster:
         data = response.json()['content']
         return RemoteContainer(self.cluster_url, ContainerModel.from_dict(data))
 
+
+    def get_containers(self) -> List[RemoteContainer]:
+        response = self.client.get(url=f'{self.cluster_url}/containers')
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        
+        containers = response.json()['content']
+        return [
+            RemoteContainer(self.cluster_url, ContainerModel.from_dict(data))
+            for data in containers
+        ]
     
+
     def remove(self, worker: RemoteWorker):
         response = self.client.delete(url=f'{self.cluster_url}/workers/{worker.name}')
         
