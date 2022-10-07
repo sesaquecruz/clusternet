@@ -5,7 +5,7 @@ from flask.wrappers import Request
 
 from clusternet.apis.cluster.controllers import (
     CreateContainerController, CreateTunnelController, CreateWorkerController, 
-    ListContainersController, ListWorkersController,
+    GetContainerController, ListContainersController, ListWorkersController,
     RemoveContainerController, RunCommandOnContainerController, RemoveWorkerController, 
     StartWorkerController, StopWorkerController
 )
@@ -38,6 +38,12 @@ def create_container():
 @server.route('/containers/<string:name>', methods=['DELETE'])
 def remove_container(name: str):
     controller = RemoveContainerController(name, repository)
+    return make_response(controller, request) 
+
+
+@server.route('/containers/<string:name>', methods=['GET'])
+def get_container(name: str):
+    controller = GetContainerController(name, repository)
     return make_response(controller, request) 
 
 

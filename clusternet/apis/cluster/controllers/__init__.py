@@ -1,6 +1,7 @@
 from clusternet.apis.cluster.controllers.create_container import CreateContainerController
 from clusternet.apis.cluster.controllers.create_tunnel import CreateTunnelController
 from clusternet.apis.cluster.controllers.create_worker import CreateWorkerController
+from clusternet.apis.cluster.controllers.get_container import GetContainerController
 from clusternet.apis.cluster.controllers.get_worker import GetWorkerController
 from clusternet.apis.cluster.controllers.list_containers import ListContainersController
 from clusternet.apis.cluster.controllers.list_workers import ListWorkersController
