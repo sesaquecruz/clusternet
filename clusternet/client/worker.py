@@ -14,6 +14,15 @@ class RemoteWorker:
             raise Exception(response.json()['error'])
         print(f'{response.json()["content"]}')
 
+    
+    def add_docker(self, name: str, **params):
+        data = {'name': name, **params}
+        response = httpx.post(url=f'{self.url}/containers', json=data, timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+
 
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
