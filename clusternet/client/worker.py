@@ -76,6 +76,14 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
     
 
+    def run_pingall(self):
+        response = httpx.get(url=f'{self.url}/hosts/pingall', timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+
+
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
         
