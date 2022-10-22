@@ -3,7 +3,7 @@ from clusternet.apis.presentation.helpers import (
     bad_request, created, error, internal_server_error, validate_required_params
 )
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
-from clusternet.apis.worker.services import WorkerInstance
+from clusternet.apis.worker.services import WorkerInstance, get_hostname
 
 class AddDockerController(Controller):
     def __init__(self) -> None:
@@ -11,16 +11,17 @@ class AddDockerController(Controller):
     
     def handle(self, request: HttpRequest) -> HttpResponse:
         required_params = ['name']
+        hostname = get_hostname()
 
         try: 
             validate_required_params(request, required_params)
             name = request.body['name']
 
             if(name in self.net):
-                raise Exception(f'Container {name} already exists')
+                raise Exception(f'[{hostname}]: container {name} already exist')
              
             self.net.addDocker(**request.body)
-            return created({'content': f'Container {name} created'})
+            return created({'content': f'[{hostname}]: container {name} created'})
         
         except BadRequest as ex:
             return bad_request(error(f'{ex}'))
