@@ -1,5 +1,7 @@
-from clusternet.apis.presentation.exceptions import BadRequest, NotFound
-from clusternet.apis.presentation.helpers import bad_request, created, error, internal_server_error, not_found, validate_required_params
+from clusternet.apis.presentation.exceptions import BadRequest
+from clusternet.apis.presentation.helpers import (
+    bad_request, created, error, internal_server_error, validate_required_params
+)
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
 from clusternet.apis.worker.services import WorkerInstance
 
@@ -8,30 +10,20 @@ class AddDockerController(Controller):
         self.net = WorkerInstance.instance()
     
     def handle(self, request: HttpRequest) -> HttpResponse:
-        required_params = ['name', 'dimage', 'cpu_period', 'cpu_quota', 'mem_limit']
+        required_params = ['name']
 
-        try:
-            if(not self.net.is_running):
-                raise Exception('Worker not is running')
-            
+        try: 
             validate_required_params(request, required_params)
-            
-            name = request.body.pop('name')
+            name = request.body['name']
+
             if(name in self.net):
                 raise Exception(f'Container {name} already exists')
              
-            self.net.addDocker(name=name, **request.body)
-            self.net.addLink(name, self.net.switches[0])
-            self.net.configHosts()
-            
+            self.net.addDocker(**request.body)
             return created({'content': f'Container {name} created'})
         
         except BadRequest as ex:
             return bad_request(error(f'{ex}'))
-        except NotFound as ex:
-            return not_found(error(f'{ex}'))
         except Exception as ex:
             return internal_server_error(error(f'{ex}'))
-        
-        
         
