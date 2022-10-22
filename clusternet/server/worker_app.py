@@ -32,7 +32,7 @@ def run_command(name: str):
     return make_response(controller, request)
 
 
-@server.route('/pingall', methods=['GET'])
+@server.route('/hosts/pingall', methods=['GET'])
 def run_pingall():
     controller = RunPingallController()
     return make_response(controller, request)
