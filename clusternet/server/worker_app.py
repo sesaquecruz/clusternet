@@ -45,7 +45,7 @@ def run_pingall():
     return make_response(controller, request)
 
 
-@server.route('/start', methods=['POST'])
+@server.route('/start', methods=['GET'])
 def start():
     controller = StartWorkerController()
     return make_response(controller, request)
