@@ -48,7 +48,15 @@ class RemoteWorker:
         if(response.is_error):
             raise Exception(response.json()['error'])
         print(f'{response.json()["content"]}')
+    
+
+    def remove_docker(self, name: str):
+        response = httpx.delete(url=f'{self.url}/containers/{name}', timeout=None)
         
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+
 
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
