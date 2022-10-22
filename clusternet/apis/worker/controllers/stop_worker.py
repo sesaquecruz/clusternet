@@ -1,6 +1,6 @@
 from clusternet.apis.presentation.helpers import error, internal_server_error, success
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
-from clusternet.apis.worker.services import WorkerInstance
+from clusternet.apis.worker.services import WorkerInstance, get_hostname
 
 
 class StopWorkerController(Controller):
@@ -8,9 +8,11 @@ class StopWorkerController(Controller):
         self.net = WorkerInstance.instance()
     
     def handle(self, request: HttpRequest) -> HttpResponse:
+        hostname = get_hostname()
+
         try:
             if(not self.net.is_running):
-                raise Exception('Worker already is stopped')
+                raise Exception(f'[{hostname}]: Containernet already is stopped')
 
             self.net.stop()
             WorkerInstance.clear_instance()
@@ -18,5 +20,5 @@ class StopWorkerController(Controller):
             message = f'{ex}'
             return internal_server_error(error(message))
         
-        return success({'content': 'Worker stopped'})
+        return success({'content': f'[{hostname}]: Containernet stopped'})
             
