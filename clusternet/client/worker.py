@@ -58,6 +58,15 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
 
 
+    def remove_link(self, node1: str, node2: str):
+        data = {'node1': node1, 'node2': node2}
+        response = httpx.post(url=f'{self.url}/links/remove', json=data, timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+
+
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
         
