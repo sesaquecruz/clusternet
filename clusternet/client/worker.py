@@ -42,6 +42,14 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
     
 
+    def config_default(self, name: str):
+        response = httpx.get(url=f'{self.url}/hosts/{name}/config', timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+        
+
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
         
