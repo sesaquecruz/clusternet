@@ -33,6 +33,15 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
 
 
+    def add_switch(self, name: str):
+        data = {'name': name}
+        response = httpx.post(url=f'{self.url}/switches', json=data, timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+    
+
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
         
