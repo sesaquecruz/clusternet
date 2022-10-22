@@ -1,5 +1,9 @@
+import socket
 from mininet.net import Containernet
 from mininet.node import Host
+
+def get_hostname() -> str:
+    return socket.gethostname()
 
 class ContainernetWorker(Containernet):
     def __init__(self, **params):
