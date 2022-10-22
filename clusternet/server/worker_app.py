@@ -5,6 +5,7 @@ from flask.wrappers import Request
 
 from clusternet.apis.worker.controllers import (
     AddController, AddDockerController, AddLinkController, AddSwitchController,
+    ConfigDefaultController, 
     RunCommandOnHostController, RunPingallController,
     StartWorkerController, StopWorkerController
 )
@@ -40,6 +41,12 @@ def add_link():
 @server.route('/switches', methods=['POST'])
 def add_switch():
     controller = AddSwitchController()
+    return make_response(controller, request)
+
+
+@server.route('/hosts/<string:name>/config', methods=['GET'])
+def config_default(name: str):
+    controller = ConfigDefaultController(name)
     return make_response(controller, request)
 
 
