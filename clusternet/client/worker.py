@@ -24,6 +24,15 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
 
 
+    def add_link(self, node1: str, node2: str, **params):
+        data = {'node1': node1, 'node2': node2, **params}
+        response = httpx.post(url=f'{self.url}/links', json=data, timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+
+
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
         
