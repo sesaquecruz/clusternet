@@ -21,7 +21,7 @@ def make_response(controller: Controller, request: Request):
 
 
 @server.route('/containers', methods=['POST'])
-def add_container():
+def add_docker():
     controller = AddDockerController()
     return make_response(controller, request)
 
