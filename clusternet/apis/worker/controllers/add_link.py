@@ -26,7 +26,6 @@ class AddLinkController(Controller):
 
             self.verify_if_node_exist(nodes=[node1, node2])
             
-            print(self.net.links)
             if(self.net.linksBetween(node1, node2)):
                 raise Exception(f'[{hostname}]: already exist a link between {node1} and {node2}')
 
