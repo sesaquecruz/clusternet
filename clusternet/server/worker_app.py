@@ -44,7 +44,7 @@ def add_link():
     return make_response(controller, request)
 
 
-@server.route('/links', methods=['POST'])
+@server.route('/links/remove', methods=['POST'])
 def remove_link():
     controller = RemoveLinkController()
     return make_response(controller, request)
