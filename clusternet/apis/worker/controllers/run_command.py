@@ -1,28 +1,27 @@
 from clusternet.apis.presentation.exceptions import BadRequest, NotFound
-from clusternet.apis.presentation.helpers import bad_request, error, internal_server_error, not_found, success, validate_required_params
+from clusternet.apis.presentation.helpers import (
+    bad_request, error, internal_server_error, not_found, success, validate_required_params
+)
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
 from clusternet.apis.worker.services import WorkerInstance
 
 
 class RunCommandOnHostController(Controller):
-    def __init__(self, hostname: str) -> None:
+    def __init__(self, name: str) -> None:
         self.net = WorkerInstance.instance()
-        self.hostname = hostname
+        self.name = name
     
     def handle(self, request: HttpRequest) -> HttpResponse:
         required_params = ['command']
 
-        try:
-            if(not self.net.is_running):
-                raise Exception('Worker not is running')
-            
-            if(not self.hostname in self.net):
-                raise NotFound(f'Host {self.hostname} not found')
-
+        try:        
             validate_required_params(request, required_params)
 
-            command = request.get('command')
-            host    = self.net.getHost(self.hostname)
+            if(not self.name in self.net):
+                raise NotFound(f'Host {self.name} not found')
+
+            command = request.body['command']
+            host    = self.net.getHost(self.name)
             output  = host.cmd(command)
 
             return success({'content': output})

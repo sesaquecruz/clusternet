@@ -26,9 +26,9 @@ def add_container():
     return make_response(controller, request)
 
 
-@server.route('/cmd/<string:host>', methods=['POST'])
-def run_command(host: str):
-    controller = RunCommandOnHostController(hostname=host)
+@server.route('/hosts/<string:name>/cmd', methods=['POST'])
+def run_command(name: str):
+    controller = RunCommandOnHostController(name)
     return make_response(controller, request)
 
 
