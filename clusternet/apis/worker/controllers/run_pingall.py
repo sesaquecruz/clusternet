@@ -1,15 +1,17 @@
 from clusternet.apis.presentation.helpers import error, internal_server_error, success
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
-from clusternet.apis.worker.services import WorkerInstance
+from clusternet.apis.worker.services import WorkerInstance, get_hostname
 
 class RunPingallController(Controller):
     def __init__(self) -> None:
         self.net = WorkerInstance.instance()
     
     def handle(self, request: HttpRequest) -> HttpResponse:
+        hostname = get_hostname()
+
         try:
             if(not self.net.is_running):
-                raise Exception('Worker not is running')
+                raise Exception(f'[{hostname}]: Containernet not is running')
 
             packets = self.net.pingAll()
             
