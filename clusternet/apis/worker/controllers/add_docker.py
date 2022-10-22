@@ -3,7 +3,7 @@ from clusternet.apis.presentation.helpers import bad_request, created, error, in
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
 from clusternet.apis.worker.services import WorkerInstance
 
-class AddContainerController(Controller):
+class AddDockerController(Controller):
     def __init__(self) -> None:
         self.net = WorkerInstance.instance()
     

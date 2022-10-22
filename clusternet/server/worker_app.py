@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 from flask.wrappers import Request
 
 from clusternet.apis.worker.controllers import (
-    AddContainerController, ListContainersController, 
+    AddDockerController, ListContainersController, 
     RunCommandOnHostController, RunPingallController,
     StartWorkerController, StopWorkerController
 )
@@ -29,7 +29,7 @@ def get_containers():
 
 @server.route('/containers', methods=['POST'])
 def add_container():
-    controller = AddContainerController()
+    controller = AddDockerController()
     return make_response(controller, request)
 
 

@@ -1,4 +1,4 @@
-from clusternet.apis.worker.controllers.add_container import AddContainerController
+from clusternet.apis.worker.controllers.add_docker import AddDockerController
 from clusternet.apis.worker.controllers.list_containers import ListContainersController
 from clusternet.apis.worker.controllers.run_command import RunCommandOnHostController
 from clusternet.apis.worker.controllers.run_pingall import RunPingallController
