@@ -1,5 +1,7 @@
 import httpx
 
+from clusternet.client.container import RemoteContainer
+
 class RemoteWorker:
     def __init__(self, ip: str) -> None:
         self.url        = f'http://{ip}:5000'
@@ -15,13 +17,15 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
 
     
-    def add_docker(self, name: str, **params):
+    def add_docker(self, name: str, **params) -> RemoteContainer:
         data = {'name': name, **params}
         response = httpx.post(url=f'{self.url}/containers', json=data, timeout=None)
         
         if(response.is_error):
             raise Exception(response.json()['error'])
+
         print(f'{response.json()["content"]}')
+        return RemoteContainer(name, self.url)
 
 
     def add_link(self, node1: str, node2: str, **params):
