@@ -14,3 +14,11 @@ class RemoteContainer:
             raise Exception(response.json()['error'])
         
         return response.json()['content']
+    
+    def config_default(self):
+        response = httpx.get(url=f'{self.url}/hosts/{self.name}/config', timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+
