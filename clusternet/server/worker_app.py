@@ -7,7 +7,8 @@ from clusternet.apis.worker.controllers import (
     AddController, AddDockerController, AddLinkController, AddSwitchController,
     ConfigDefaultController, RemoveDockerController, RemoveLinkController,
     RunCommandOnHostController, RunPingallController,
-    StartWorkerController, StopWorkerController
+    StartWorkerController, StopWorkerController, 
+    UpdateCPUController
 )
 from clusternet.apis.presentation.helpers import parse_request
 from clusternet.apis.presentation.protocols import Controller
@@ -35,6 +36,12 @@ def add_docker():
 @server.route('/containers/<string:name>', methods=['DELETE'])
 def remove_docker(name: str):
     controller = RemoveDockerController(name)
+    return make_response(controller, request)
+
+
+@server.route('/containers/<string:name>/cpu', methods=['PUT'])
+def update_cpu(name: str):
+    controller = UpdateCPUController(name)
     return make_response(controller, request)
 
 
