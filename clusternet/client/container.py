@@ -31,3 +31,11 @@ class RemoteContainer:
             raise Exception(response.json()['error'])
         print(f'{response.json()["content"]}')
     
+
+    def update_memory(self, mem_limit: int):
+        data = {'mem_limit': mem_limit}
+        response = httpx.put(url=f'{self.url}/containers/{self.name}/memory', json=data, timeout=None)
+
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
