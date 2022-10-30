@@ -15,7 +15,7 @@ class UpdateMemoryController(Controller):
 
         try:
             if(not self.name in self.net):
-                raise NotFound(f'[{get_hostname()}]: container {self.name} not found')
+                raise NotFound(f'[{hostname}]: container {self.name} not found')
 
             validate_required_params(request, required_params)
             mem_limit = int(request.body['mem_limit'])

@@ -21,7 +21,7 @@ class RunCommandOnHostController(Controller):
             if(not self.name in self.net):
                 raise NotFound(f'[{hostname}]: node {self.name} not found')
 
-            command = request.body['command']
+            command = str(request.body['command'])
             host    = self.net.getHost(self.name)
             output  = host.cmd(command)
 

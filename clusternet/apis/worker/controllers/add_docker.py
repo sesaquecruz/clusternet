@@ -15,7 +15,7 @@ class AddDockerController(Controller):
 
         try: 
             validate_required_params(request, required_params)
-            name = request.body['name']
+            name = str(request.body['name'])
 
             if(name in self.net):
                 raise Exception(f'[{hostname}]: container {name} already exist')

@@ -15,8 +15,8 @@ class RemoveLinkController(Controller):
 
         try:
             validate_required_params(request, required_params)
-            node1 = request.body['node1']
-            node2 = request.body['node2']
+            node1 = str(request.body['node1'])
+            node2 = str(request.body['node2'])
             self.net.removeLink(node1=node1, node2=node2)
 
             return success({'content': f'[{hostname}]: link removed between {node1} and {node2}'})

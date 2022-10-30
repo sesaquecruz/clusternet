@@ -1,5 +1,7 @@
 from clusternet.apis.presentation.exceptions import BadRequest, NotFound
-from clusternet.apis.presentation.helpers import bad_request, error, internal_server_error, not_found, success, validate_required_params
+from clusternet.apis.presentation.helpers import (
+    bad_request, error, internal_server_error, not_found, success, validate_required_params
+)
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
 from clusternet.apis.worker.services import WorkerInstance, get_hostname
 
@@ -15,7 +17,7 @@ class UpdateCPUController(Controller):
 
         try:
             if(not self.name in self.net):
-                raise NotFound(f'[{get_hostname()}]: node {self.name} not found')
+                raise NotFound(f'[{hostname}]: container {self.name} not found')
 
             validate_required_params(request, required_params)
             cpu_quota = int(request.body['cpu_quota'])

@@ -21,8 +21,8 @@ class AddLinkController(Controller):
 
         try:
             validate_required_params(request, required_params)
-            node1 = request.body['node1']
-            node2 = request.body['node2']
+            node1 = str(request.body['node1'])
+            node2 = str(request.body['node2'])
 
             self.verify_if_node_exist(nodes=[node1, node2])
             
