@@ -23,6 +23,14 @@ class RemoteContainer:
         print(f'{response.json()["content"]}')
     
 
+    def get_ip(self) -> str:
+        response = httpx.get(url=f'{self.url}/containers/{self.name}/ip', timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        return response.json()['content']
+
+
     def update_cpu(self, cpu_quota: int, cpu_period: int):
         data = {'cpu_quota': cpu_quota, 'cpu_period': cpu_period}
         response = httpx.put(url=f'{self.url}/containers/{self.name}/cpu', json=data, timeout=None)
