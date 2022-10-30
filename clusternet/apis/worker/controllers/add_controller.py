@@ -19,9 +19,9 @@ class AddController(Controller):
 
         try:
             validate_required_params(request, required_params)
-            name = request.body['name']
-            ip   = request.body['ip']
-            port = request.body['port']
+            name = str(request.body['name'])
+            ip   = str(request.body['ip'])
+            port = int(request.body['port'])
 
             if(name in self.net):
                 raise Exception(f'[{hostname}]: controller {name} already exist')
