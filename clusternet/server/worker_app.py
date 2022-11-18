@@ -7,7 +7,7 @@ from clusternet.apis.worker.controllers import (
     AddController, AddDockerController, AddLinkController, AddSwitchController,
     ConfigDefaultController, GetDockerIPController,
     RemoveDockerController, RemoveLinkController, RunCommandOnHostController, RunPingallController,
-    StartDockerController, StartWorkerController, StopWorkerController, 
+    StartDockerController, StopDockerController, StartWorkerController, StopWorkerController, 
     UpdateCPUController, UpdateMemoryController
 )
 from clusternet.apis.presentation.helpers import parse_request
@@ -42,6 +42,12 @@ def get_ip(name: str):
 @server.route('/containers/<string:name>/start', methods=['GET'])
 def start_docker(name: str):
     controller = StartDockerController(name)
+    return make_response(controller, request)
+
+
+@server.route('/containers/<string:name>/stop', methods=['GET'])
+def stop_docker(name: str):
+    controller = StopDockerController(name)
     return make_response(controller, request)
 
 

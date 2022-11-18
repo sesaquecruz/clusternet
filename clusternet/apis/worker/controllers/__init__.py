@@ -10,6 +10,7 @@ from clusternet.apis.worker.controllers.run_command import RunCommandOnHostContr
 from clusternet.apis.worker.controllers.run_pingall import RunPingallController
 from clusternet.apis.worker.controllers.start_docker import StartDockerController
 from clusternet.apis.worker.controllers.start_worker import StartWorkerController
+from clusternet.apis.worker.controllers.stop_docker import StopDockerController
 from clusternet.apis.worker.controllers.stop_worker import StopWorkerController
 from clusternet.apis.worker.controllers.update_cpu import UpdateCPUController
 from clusternet.apis.worker.controllers.update_memory import UpdateMemoryController
