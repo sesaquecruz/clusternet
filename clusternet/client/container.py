@@ -55,4 +55,12 @@ class RemoteContainer:
         if(response.is_error):
             raise Exception(response.json()['error'])
         print(f'{response.json()["content"]}')
+    
+
+    def stop(self):
+        response = httpx.get(url=f'{self.url}/containers/{self.name}/stop', timeout=None)
+
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
         
