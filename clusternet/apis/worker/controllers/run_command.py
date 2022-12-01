@@ -3,7 +3,7 @@ from clusternet.apis.presentation.helpers import (
     bad_request, error, internal_server_error, not_found, success, validate_required_params
 )
 from clusternet.apis.presentation.protocols import Controller, HttpRequest, HttpResponse
-from clusternet.apis.worker.services import WorkerInstance, get_hostname
+from clusternet.apis.worker.helpers import WorkerInstance, get_hostname
 
 
 class RunCommandOnHostController(Controller):
