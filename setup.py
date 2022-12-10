@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='clusternet',
-    version='0.2.0',
+    version='0.3.0',
     description='Distributed Software Defined Network Emulation',
     long_description='Distributed Software Defined Network Emulation',
     keywords=['networking', 'emulator', 'containernet', 'mininet', 'OpenFlow', 'SDN', 'fog'],
@@ -23,7 +23,6 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'RunCluster = clusternet.server.cluster_app:main',
             'RunWorker = clusternet.server.worker_app:main',
         ]
     },
