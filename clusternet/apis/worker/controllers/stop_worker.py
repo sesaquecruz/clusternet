@@ -12,6 +12,7 @@ class StopWorkerController(Controller):
 
         try:
             if(not self.net.is_running):
+                WorkerInstance.clear_instance()
                 raise Exception(f'[{hostname}]: Containernet already is stopped')
 
             self.net.stop()

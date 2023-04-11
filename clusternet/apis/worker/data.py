@@ -1,6 +1,6 @@
 from mininet.net import Containernet
 from mininet.node import Docker, Host
-
+from mininet.log import info
 
 class ContainernetWorker(Containernet):
     def __init__(self, **params):
@@ -21,6 +21,13 @@ class ContainernetWorker(Containernet):
         super().stop()
         self.is_running = False
 
+    def stop_hosts(self):
+        info(f'*** Stopping {len(self.hosts)} hosts\n')
+        for host in self.hosts:
+            info(host.name + ' ')
+            host.terminate()
+        info('\n')
+
 
 class WorkerInstance:
     worker = ContainernetWorker(topo=None, build=False)
@@ -31,4 +38,5 @@ class WorkerInstance:
 
     @staticmethod
     def clear_instance():
+        WorkerInstance.instance().stop_hosts()
         WorkerInstance.worker = ContainernetWorker(topo=None, build=False)

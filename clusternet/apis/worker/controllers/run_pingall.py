@@ -11,7 +11,7 @@ class RunPingallController(Controller):
 
         try:
             if(not self.net.is_running):
-                raise Exception(f'[{hostname}]: Containernet not is running')
+                raise Exception(f'[{hostname}]: Containernet is not running')
 
             packets = self.net.pingAll()
             
