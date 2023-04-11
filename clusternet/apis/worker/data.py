@@ -38,5 +38,4 @@ class WorkerInstance:
 
     @staticmethod
     def clear_instance():
-        WorkerInstance.instance().stop_hosts()
         WorkerInstance.worker = ContainernetWorker(topo=None, build=False)
