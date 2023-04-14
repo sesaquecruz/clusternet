@@ -1,3 +1,4 @@
+import argparse
 import os
 
 from flask import Flask, jsonify, request
@@ -118,7 +119,11 @@ def stop():
 
 
 def main():
-    server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    parser = argparse.ArgumentParser('sudo RunWorker')
+    parser.add_argument('-p', '--port', type=int, default=5000, help='run server on especified port (default: 5000)')
+    args = parser.parse_args()
+    
+    server.run(host='0.0.0.0', port=int(os.environ.get('PORT', args.port)))
 
 if(__name__=='__main__'):
     main()
