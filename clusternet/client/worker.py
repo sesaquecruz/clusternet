@@ -3,8 +3,8 @@ import httpx
 from clusternet.client.container import RemoteContainer
 
 class RemoteWorker:
-    def __init__(self, ip: str) -> None:
-        self.url        = f'http://{ip}:5000'
+    def __init__(self, ip: str, port: int = 5000) -> None:
+        self.url        = f'http://{ip}:{port}'
         self.is_running = False
 
 
