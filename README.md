@@ -1,7 +1,11 @@
+![](https://img.shields.io/badge/python-3.8+-blue.svg)
+![](https://img.shields.io/badge/Ubuntu-20.04-orange.svg)
 # Clusternet
 
 This project extends the [Containernet](https://github.com/containernet/containernet) emulation environment to span the emulation across several physical machines.
 
+## Dependencies
+- [Containernet](https://github.com/containernet/containernet) (Use the Option 1 installation)
 ## Install
 
 ```
