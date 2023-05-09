@@ -1,5 +1,5 @@
 from typing import List
-from clusternet.apis.presentation.exceptions import BadRequest, NotFound
+from clusternet.apis.presentation.exceptions import BadRequestException, NotFoundException
 from clusternet.apis.presentation.helpers import (
     bad_request, created, error, internal_server_error, not_found, validate_required_params
 )
@@ -13,7 +13,7 @@ class AddLinkController(Controller):
     def verify_if_node_exist(self, nodes: List[str]):
         for node in nodes:
             if(not node in self.net): 
-                raise NotFound(f'[{get_hostname()}]: node {node} not found')
+                raise NotFoundException(f'[{get_hostname()}]: node {node} not found')
 
     def handle(self, request: HttpRequest) -> HttpResponse:
         required_params = ['node1', 'node2']
@@ -33,9 +33,9 @@ class AddLinkController(Controller):
             
             return created({'content': f'[{hostname}]: link created between {node1} and {node2}'})
 
-        except BadRequest as ex:
+        except BadRequestException as ex:
             return bad_request(error(f'{ex}'))
-        except NotFound as ex:
+        except NotFoundException as ex:
             return not_found(error(f'{ex}'))
         except Exception as ex:
             return internal_server_error(error(f'{ex}'))

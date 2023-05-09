@@ -2,8 +2,6 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict
 
 class HttpRequest:
-    body: Dict[str, Any]
-
     def __init__(self, body: Dict[str, Any]) -> None:
         self.body = body
     
@@ -12,9 +10,6 @@ class HttpRequest:
 
 
 class HttpResponse:
-    status_code: int
-    body: Dict[str, Any]
-
     def __init__(self, status_code: int, body: Dict[str, Any]) -> None:
         self.status_code = status_code
         self.body = body

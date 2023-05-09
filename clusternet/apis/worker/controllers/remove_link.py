@@ -1,4 +1,4 @@
-from clusternet.apis.presentation.exceptions import BadRequest
+from clusternet.apis.presentation.exceptions import BadRequestException
 from clusternet.apis.presentation.helpers import (
     bad_request, error, internal_server_error, success, validate_required_params
 )
@@ -21,7 +21,7 @@ class RemoveLinkController(Controller):
 
             return success({'content': f'[{hostname}]: link removed between {node1} and {node2}'})
 
-        except BadRequest as ex:
+        except BadRequestException as ex:
             return bad_request(error(f'{ex}'))
         except Exception as ex:
             return internal_server_error(error(f'{ex}'))

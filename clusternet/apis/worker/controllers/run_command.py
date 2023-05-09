@@ -1,4 +1,4 @@
-from clusternet.apis.presentation.exceptions import BadRequest, NotFound
+from clusternet.apis.presentation.exceptions import BadRequestException, NotFoundException
 from clusternet.apis.presentation.helpers import (
     bad_request, error, internal_server_error, not_found, success, validate_required_params
 )
@@ -19,7 +19,7 @@ class RunCommandOnHostController(Controller):
             validate_required_params(request, required_params)
 
             if(not self.name in self.net):
-                raise NotFound(f'[{hostname}]: node {self.name} not found')
+                raise NotFoundException(f'[{hostname}]: node {self.name} not found')
 
             command = str(request.body['command'])
             host    = self.net.getHost(self.name)
@@ -27,9 +27,9 @@ class RunCommandOnHostController(Controller):
 
             return success({'content': output})
             
-        except BadRequest as ex:
+        except BadRequestException as ex:
             return bad_request(error(f'{ex}'))
-        except NotFound as ex:
+        except NotFoundException as ex:
             return not_found(error(f'{ex}'))
         except Exception as ex:
             return internal_server_error(error(f'{ex}'))

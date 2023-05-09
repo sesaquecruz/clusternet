@@ -1,4 +1,4 @@
-from clusternet.apis.presentation.exceptions import NotFound
+from clusternet.apis.presentation.exceptions import NotFoundException
 from clusternet.apis.presentation.helpers import (
     error, internal_server_error, not_found, success
 )
@@ -16,11 +16,11 @@ class RemoveDockerController(Controller):
 
         try:
             if(not self.net.removeDocker(name)):
-                raise NotFound(f'[{hostname}]: container {name} not found')
+                raise NotFoundException(f'[{hostname}]: container {name} not found')
 
             return success({'content': f'[{hostname}]: container {name} removed'})
 
-        except NotFound as ex:
+        except NotFoundException as ex:
             return not_found(error(f'{ex}'))
         except Exception as ex:
             return internal_server_error(error(f'{ex}'))

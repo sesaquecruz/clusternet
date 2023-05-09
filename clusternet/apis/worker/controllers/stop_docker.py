@@ -1,4 +1,4 @@
-from clusternet.apis.presentation.exceptions import NotFound
+from clusternet.apis.presentation.exceptions import NotFoundException
 from clusternet.apis.presentation.helpers import (
     error, internal_server_error, not_found, success
 )
@@ -16,12 +16,12 @@ class StopDockerController(Controller):
         
         try:
             if(not self.name in self.net):
-                raise NotFound(f'[{hostname}]: container {self.name} not found')
+                raise NotFoundException(f'[{hostname}]: container {self.name} not found')
             
             self.net.getDocker(self.name).stop()
             return success({'content': f'[{hostname}]: container {self.name} stopped'})
 
-        except NotFound as ex:
+        except NotFoundException as ex:
             return not_found(error(f'{ex}'))
         except Exception as ex:
             return internal_server_error(error(f'{ex}'))

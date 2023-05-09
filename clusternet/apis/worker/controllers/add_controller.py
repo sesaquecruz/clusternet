@@ -1,6 +1,6 @@
 from functools import partial
 
-from clusternet.apis.presentation.exceptions import BadRequest
+from clusternet.apis.presentation.exceptions import BadRequestException
 from clusternet.apis.presentation.helpers import (
     bad_request, created, error, internal_server_error, validate_required_params
 )
@@ -30,7 +30,7 @@ class AddController(Controller):
             self.net.addController(name, controller)
             return created({'content': f'[{hostname}]: controller {name} created'})
 
-        except BadRequest as ex:
+        except BadRequestException as ex:
             return bad_request(error(f'{ex}'))
         except Exception as ex:
             return internal_server_error(error(f'{ex}'))
