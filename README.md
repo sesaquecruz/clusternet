@@ -38,9 +38,9 @@ try:
 
     worker.start()
     worker.run_pingall()
-
-    print(d1.get_ip())
-    print(d2.cmd('ifconfig'))
+    
+    print(d1.cmd('ifconfig'))
+    print(d2.cmd(f'ping -c 4 {d1.get_ip()}'))
 
 except Exception as ex:
     print(ex)
