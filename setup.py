@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='clusternet',
-    version='0.5.2',
+    version='0.6.2',
     description='Distributed Software Defined Network Emulation',
     long_description='Distributed Software Defined Network Emulation',
     keywords=['networking', 'emulator', 'containernet', 'mininet', 'OpenFlow', 'SDN', 'fog'],

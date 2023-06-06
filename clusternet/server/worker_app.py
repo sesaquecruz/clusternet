@@ -6,7 +6,7 @@ from flask.wrappers import Request
 
 from clusternet.apis.worker.controllers import (
     AddController, AddDockerController, AddLinkController, AddSwitchController,
-    ConfigDefaultController, GetDockerIPController,
+    CleanContainersController, ConfigDefaultController, GetDockerIPController,
     RemoveDockerController, RemoveLinkController, RunCommandOnHostController, RunPingallController,
     StartDockerController, StopDockerController, StartWorkerController, StopWorkerController, 
     UpdateCPUController, UpdateMemoryController
@@ -31,6 +31,12 @@ def add_controller():
 @server.route('/containers', methods=['POST'])
 def add_docker():
     controller = AddDockerController()
+    return make_response(controller, request)
+
+
+@server.route('/containers/clean', methods=['POST'])
+def clean_containers():
+    controller = CleanContainersController()
     return make_response(controller, request)
 
 

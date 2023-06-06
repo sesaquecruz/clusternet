@@ -46,6 +46,15 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
     
 
+    def clean_containers(self, prefix: str):
+        data = {'containers_prefix': prefix}
+        response = httpx.post(url=f'{self.url}/containers/clean', json=data, timeout=None)
+
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+        
+
     def config_default(self, name: str):
         response = httpx.get(url=f'{self.url}/hosts/{name}/config', timeout=None)
         

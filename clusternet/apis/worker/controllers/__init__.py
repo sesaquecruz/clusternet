@@ -2,6 +2,7 @@ from clusternet.apis.worker.controllers.add_controller import AddController
 from clusternet.apis.worker.controllers.add_docker import AddDockerController
 from clusternet.apis.worker.controllers.add_link import AddLinkController
 from clusternet.apis.worker.controllers.add_switch import AddSwitchController
+from clusternet.apis.worker.controllers.clean_containers import CleanContainersController
 from clusternet.apis.worker.controllers.config_default import ConfigDefaultController
 from clusternet.apis.worker.controllers.get_docker_ip import GetDockerIPController
 from clusternet.apis.worker.controllers.remove_docker import RemoveDockerController
