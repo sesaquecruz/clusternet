@@ -7,8 +7,9 @@ from flask.wrappers import Request
 from clusternet.apis.worker.controllers import (
     AddController, AddDockerController, AddLinkController, AddSwitchController,
     CleanContainersController, ConfigDefaultController, GetDockerIPController,
-    RemoveDockerController, RemoveLinkController, RunCommandOnHostController, RunPingallController,
-    StartDockerController, StopDockerController, StartWorkerController, StopWorkerController, 
+    RemoveDockerController, RemoveLinkController, RunCommandOnHostController, 
+    RunServiceController, RunPingallController, StartDockerController, 
+    StopDockerController, StartWorkerController, StopWorkerController, 
     UpdateCPUController, UpdateMemoryController
 )
 from clusternet.apis.presentation.helpers import parse_request
@@ -109,6 +110,12 @@ def run_command(name: str):
 @server.route('/hosts/pingall', methods=['GET'])
 def run_pingall():
     controller = RunPingallController()
+    return make_response(controller, request)
+
+
+@server.route('/services', methods=['POST'])
+def run_service():
+    controller = RunServiceController()
     return make_response(controller, request)
 
 

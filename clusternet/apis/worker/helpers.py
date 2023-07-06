@@ -1,10 +1,11 @@
-from typing import List
+from typing import Any, List
 import docker
 import socket
 
 from mininet.log import info
 from clusternet.apis.worker.data import WorkerInstance
 
+client = docker.from_env()
 
 def get_hostname() -> str:
     return socket.gethostname()
@@ -22,3 +23,6 @@ def clean_containers_with_prefix(prefix: str) -> List[str]:
             removed_containers.append(name)
     
     return removed_containers
+
+def run_container(name: str, image: str, **params: Any):
+    client.containers.run(image, name=name, remove=True, detach=True, **params)

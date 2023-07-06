@@ -1,3 +1,4 @@
+from typing import Any
 import httpx
 
 from clusternet.client.container import RemoteContainer
@@ -17,7 +18,7 @@ class RemoteWorker:
         print(f'{response.json()["content"]}')
 
     
-    def add_docker(self, name: str, **params) -> RemoteContainer:
+    def add_docker(self, name: str, **params: Any) -> RemoteContainer:
         data = {'name': name, **params}
         response = httpx.post(url=f'{self.url}/containers', json=data, timeout=None)
         
@@ -28,7 +29,7 @@ class RemoteWorker:
         return RemoteContainer(name, self.url)
 
 
-    def add_link(self, node1: str, node2: str, **params):
+    def add_link(self, node1: str, node2: str, **params: Any):
         data = {'node1': node1, 'node2': node2, **params}
         response = httpx.post(url=f'{self.url}/links', json=data, timeout=None)
         
@@ -96,6 +97,15 @@ class RemoteWorker:
             raise Exception(response.json()['error'])
         print(f'{response.json()["content"]}')
 
+
+    def run_service(self, name: str, image: str, **params: Any):
+        data = {'name': name, 'image': image, **params}
+        response = httpx.post(url=f'{self.url}/services', json=data, timeout=None)
+        
+        if(response.is_error):
+            raise Exception(response.json()['error'])
+        print(f'{response.json()["content"]}')
+    
 
     def start(self):
         response = httpx.get(url=f'{self.url}/start', timeout=None)
