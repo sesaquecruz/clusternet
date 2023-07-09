@@ -5,6 +5,7 @@ from clusternet.client.container import RemoteContainer
 
 class RemoteWorker:
     def __init__(self, ip: str, port: int = 5000) -> None:
+        self.ip         = ip
         self.url        = f'http://{ip}:{port}'
         self.is_running = False
 
