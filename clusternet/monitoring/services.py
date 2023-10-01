@@ -5,6 +5,7 @@ from clusternet.client.worker import RemoteWorker
 
 client = docker.from_env()
 
+CLUSTERNET_PREFIX = 'cn.'
 
 def clean_containers(prefix: str):
     for container in client.containers.list(all=True):
@@ -19,7 +20,7 @@ def run_container(name: str, image: str, **params: Any):
 
 def run_cadvisor():
     run_container(
-        name='cadvisor',
+        name=CLUSTERNET_PREFIX + 'cadvisor',
         image='gcr.io/cadvisor/cadvisor:v0.47.2',
         ports={'8080/tcp': 8080},
         volumes=[
@@ -34,7 +35,7 @@ def run_cadvisor():
 
 def run_grafana(grafana_path: str):
     run_container(
-        name='grafana',
+        name=CLUSTERNET_PREFIX + 'grafana',
         image='grafana/grafana-enterprise',
         ports={'3000/tcp': 3000},
         volumes=[f'{grafana_path}:/etc/grafana'],
@@ -45,7 +46,7 @@ def run_grafana(grafana_path: str):
 
 def run_prometheus(prometheus_path: str):
     run_container(
-        name='prometheus',
+        name=CLUSTERNET_PREFIX + 'prometheus',
         image='prom/prometheus',
         ports={'9090/tcp': 9090},
         volumes=[f'{prometheus_path}:/etc/prometheus'])
@@ -54,7 +55,7 @@ def run_prometheus(prometheus_path: str):
 def run_node_exporters(workers: List[RemoteWorker]):
     for worker in workers:
         worker.run_service(
-            name='cadvisor',
+            name=CLUSTERNET_PREFIX + 'cadvisor',
             image='gcr.io/cadvisor/cadvisor:v0.47.2',
             ports={'8080/tcp': 8080},
             volumes=[
@@ -69,4 +70,4 @@ def run_node_exporters(workers: List[RemoteWorker]):
 
 def clean_workers(workers: List[RemoteWorker]):
     for worker in workers:
-        worker.clean_containers(prefix='')
+        worker.clean_containers(prefix=CLUSTERNET_PREFIX)

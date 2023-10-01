@@ -726,10 +726,10 @@
           {
             "selected": false,
             "text": "$UID",
-            "value": "\"cadvisor|grafana|prometheus\""
+            "value": "\"cn.cadvisor|cn.grafana|cn.prometheus\""
           }
         ],
-        "query": "all : \".\", $UID : \"cadvisor|grafana|prometheus\"",
+        "query": "all : \".\", $UID : \"cn.cadvisor|cn.grafana|cn.prometheus\"",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"

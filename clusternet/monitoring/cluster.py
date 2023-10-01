@@ -7,6 +7,7 @@ from clusternet.monitoring.helpers import (
     create_grafana_files, create_prometheus_file, resolve_ip
 )
 from clusternet.monitoring.services import (
+    CLUSTERNET_PREFIX, 
     clean_containers, clean_workers, run_cadvisor, 
     run_grafana, run_node_exporters, run_prometheus
 )
@@ -51,7 +52,7 @@ class ClusterMonitoring:
 
     
     def stop(self):
-        clean_containers(prefix='')
+        clean_containers(prefix=CLUSTERNET_PREFIX)
         if(self.workers is not None):
             clean_workers(self.workers)
 
