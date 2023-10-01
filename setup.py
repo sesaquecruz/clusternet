@@ -12,7 +12,7 @@ setup(
     classifiers=[
         'Intended Audience :: Developers',
         'Programming Language :: Python 3.8',
-        'Topic :: System :: Emulators'
+        'Topic :: System :: Emulators',
         'Operating System :: Ubunbu OS'
     ],
     packages=find_packages(),
