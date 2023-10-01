@@ -10,10 +10,7 @@ setup(
     author='Esaú Mascarenhas',
     author_email='esaumasc@gmail.com',
     classifiers=[
-        'Intended Audience :: Developers',
-        'Programming Language :: Python 3.8',
-        'Topic :: System :: Emulators',
-        'Operating System :: Ubunbu OS'
+        'Intended Audience :: Developers'
     ],
     packages=find_packages(),
     install_requires = [
