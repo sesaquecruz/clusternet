@@ -1,10 +1,14 @@
 from setuptools import setup, find_packages
 
+with open('README.md', 'r') as file:
+    description = file.read()
+
 setup(
     name='clusternet',
     version='0.9.2',
     description='Distributed Software Defined Network Emulation',
-    long_description='Distributed Software Defined Network Emulation',
+    long_description=description,
+    long_description_content_type='text/markdown',
     keywords=['networking', 'emulator', 'containernet', 'mininet', 'OpenFlow', 'SDN', 'fog'],
     url='https://github.com/EsauM10/clusternet',
     author='Esaú Mascarenhas',
@@ -16,7 +20,8 @@ setup(
     install_requires = [
         'Flask',
         'Flask-Cors',
-        'httpx'
+        'httpx',
+        'pyyaml'
     ],
     entry_points={
         'console_scripts': [
