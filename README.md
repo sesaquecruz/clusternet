@@ -9,7 +9,7 @@ This project extends the [Containernet](https://github.com/containernet/containe
 ## Install
 
 ```
-sudo pip install -U git+https://github.com/EsauM10/clusternet.git
+sudo pip install -U clusternet
 ```
 
 ## Usage
