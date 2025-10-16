@@ -27,7 +27,7 @@ classifiers = [
 ]
 
 [project.scripts]
-RunWorker = clusternet.server.worker_app:main
+RunWorker = "clusternet.server.worker_app:main"
 
 [project.urls]
 Homepage = "https://github.com/larsid/clusternet"
