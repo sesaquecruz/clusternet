@@ -1,4 +1,5 @@
 from typing import List
+from mininet.link import TCLink
 from clusternet.apis.presentation.exceptions import BadRequestException, NotFoundException
 from clusternet.apis.presentation.helpers import (
     bad_request, created, error, internal_server_error, not_found, validate_required_params
@@ -29,7 +30,7 @@ class AddLinkController(Controller):
             if(self.net.linksBetween(node1, node2)):
                 raise Exception(f'[{hostname}]: already exist a link between {node1} and {node2}')
 
-            self.net.addLink(**request.body)
+            self.net.addLink(**request.body, cls=TCLink)
             
             return created({'content': f'[{hostname}]: link created between {node1} and {node2}'})
 
